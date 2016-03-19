@@ -1,0 +1,1 @@
+& "$PSScriptRoot\Test-Basic.ps1"
