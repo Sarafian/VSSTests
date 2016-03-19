@@ -1,10 +1,14 @@
-$originalVerbosePreference=$VerbosePreference
-$VerbosePreference="Continue"
+Write-Debug "Env:Agent_Id=$($Env:Agent_Id)"
+$vssAgentDetected=$false
 if($Env:Agent_Id)
 {
-    Write-Verbose "Visual Studio Services Agent detected. Importing Pester."
+    $vssAgentDetected=$True
     $pesterModulePath=Resolve-Path "$PSScriptRoot\..\VSS\Modules\Pester\Pester.psm1"
-    Write-Verbose "pesterModulePath=$pesterModulePath"
-    $VerbosePreference=$originalVerbosePreference
+    Write-Debug "pesterModulePath=$pesterModulePath"
     Import-Module $pesterModulePath 
 }
+
+function Test-VSSAgent {
+    $vssAgentDetected
+}
+
