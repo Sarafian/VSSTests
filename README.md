@@ -1,8 +1,8 @@
 # Status
 | Branch | Status
 | ---------- | ---------
-| **master** | [![masterstatus](https://asarafian.visualstudio.com/DefaultCollection/_apis/public/build/definitions/15f9cba2-7205-4168-9714-b794c4364f26/7/badge)
-| **powershell**    | [![masterstatus](https://asarafian.visualstudio.com/DefaultCollection/_apis/public/build/definitions/15f9cba2-7205-4168-9714-b794c4364f26/4/badge)
+| **master** | ![masterstatus](https://asarafian.visualstudio.com/DefaultCollection/_apis/public/build/definitions/15f9cba2-7205-4168-9714-b794c4364f26/7/badge)
+| **powershell**    | ![masterstatus](https://asarafian.visualstudio.com/DefaultCollection/_apis/public/build/definitions/15f9cba2-7205-4168-9714-b794c4364f26/4/badge)
 
 # VSSTests
 
