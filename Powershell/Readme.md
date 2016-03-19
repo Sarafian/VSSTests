@@ -2,7 +2,7 @@
 
 This section is about figuring out
 
-* how to structure a powershell repository. Everything under [PowerShell](Powershell) folder mimics a powershell module repository.
+* how to structure a powershell repository. Everything under [PowerShell](PowerShell) folder mimics a powershell module repository.
 * how to use Pester for to test the module.
 * how to create assets that work well locally but also from within Visual Studio Services build agents.
 * how to publish a module.
@@ -29,7 +29,11 @@ Within [Pester](Pester) folder we have a script per module.
 * [Test-All.ps1](Pester/Test-All.ps1) runs all other module specific test files.
 
 ## The Scripts directory
-Within [Scripts](Scripts) folder we have a collection for scripts. 
+Within `Scripts` folder we have a collection for scripts.
+
+## The Scripts directory
+Within `Debug` folder we have a collection for scripts. This seems unnecessary since the Pester scripts are excellent for debugging.
+
 
 # Online resources
 
