@@ -1,4 +1,4 @@
-. "$PSScriptRoot\Initialize-VSS.ps1"
+. "$PSScriptRoot\..\VSS\Initialize-VSS.ps1"
 
 $testPath=Resolve-Path "$PSScriptRoot\..\Modules\Basic\"
 if(Test-VSSAgent)
