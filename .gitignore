@@ -234,3 +234,10 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
+# Powershell Module assets
+**/*.psd1
+
+# Nuget spec files
+**/*.nuspec
