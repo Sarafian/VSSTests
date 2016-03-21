@@ -17,6 +17,9 @@ Create all modules withing the `Modules` directory as powershell pipeline expect
 ## The ISEScripts directory
 Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
 * [Add-ModuleToPSModulePath.ps1](ISEScripts/Add-ModuleToPSModulePath.ps1). Add this to your `Microsoft.PowerShellISE_profile.ps1`
+* [Reset-Module.ps1](ISEScripts/Reset-Module.ps1). Execute this from any script. 
+ * When executing from `ISE` it will reload the modules. This will allow you to work trasnparently with the latest saved files.
+ * When not executing from `ISE` it will append the `Modules` directory to the `$env:PSModulePath`. This will allow your script to utilize the modules. 
 
 ## The VSS directory
 Within [VSS](VSS) there is the original source code of Pester. The reason is that at this point VSS uses powershell version 5 and Pester is not included.
@@ -29,9 +32,19 @@ Within [Pester](Pester) folder we have a script per module.
 * [Test-All.ps1](Pester/Test-All.ps1) runs all other module specific test files.
 
 ## The Scripts directory
-Within `Scripts` folder we have a collection for scripts.
+Within `Scripts` folder we have a collection for scripts. The [Test-Showcase.ps1](Scripts/Test-Showcase.ps1) shows how to use the [Reset-Module.ps1](ISEScripts/Reset-Module.ps1).
 
-## The Scripts directory
+## The Publish directory
+Within `Publish` folder we see the following files
+* [nuget.exe](Publish/nuget.exe)
+* [PreparePSD1AndNuSpec.ps1](Publish/PreparePSD1AndNuSpec.ps1). For each module the following files are created
+ * Manifest `.psd1` file.
+ * Nuspec `.nuspec` file
+
+These files are ignored from `.gitignore`.
+* [PublishNuGet.ps1](Publish/PublishNuGet.ps1). This will create the nuget package file `.nupkg`. Then it will publish this to the `NuGetUri` using an optional `APiKey`.
+
+## The Debug directory
 Within `Debug` folder we have a collection for scripts. This seems unnecessary since the Pester scripts are excellent for debugging.
 
 
