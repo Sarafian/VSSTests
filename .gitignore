@@ -26,3 +26,7 @@ $RECYCLE.BIN/
 
 # Nuget spec files
 **/*.nuspec
+
+
+# Include nuget.exe
+!PowerShell/Publish/nuget.exe

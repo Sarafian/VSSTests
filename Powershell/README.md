@@ -12,7 +12,12 @@ This section is about figuring out
 ## The Modules directory
 
 Create all modules withing the `Modules` directory as powershell pipeline expects them. You don't have to worry about the `.psm1` location. Every module must have a matching Pester test script.
-* Basic is a simple module with one commandlet `Get-String`. [Get-String.Tests.ps1](Modules/Basic/Get-String.Tests.ps1) is intenioally failing on one test.
+
+* `DemoPester` is a simple module to demonstrate Pester error checking.
+* `WithDependency` is a simple module to demonstrate dependencies to other modules that are not available when executing from Pester.
+ * `Test-DemoPesterDependency` depends on the DemoPester module.
+ * `Test-PSMarkdownDependency` depends on the [PSMarkdown](https://www.powershellgallery.com/packages/PSMarkdown) module.
+
 
 ## The ISEScripts directory
 Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
@@ -23,13 +28,47 @@ Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
 
 ## The VSS directory
 Within [VSS](VSS) there is the original source code of Pester. The reason is that at this point VSS uses powershell version 5 and Pester is not included.
-* [Initialize-VSS.ps1](VSS/Initialize-VSS.ps1) provides some basic functionality to detect if a script is executing at VSS
 * [QueryEnvironment.ps1](VSS/QueryEnvironment.ps1) output some information in the console to help out with understanding what is going on
 
 ## The Pester directory
-Within [Pester](Pester) folder we have a script per module. 
-* [Test-Basic.ps1](Pester/Test-Basic.ps1) tests the Basic module. The script utilizes the functionality provided in [Initialize-VSS.ps1](VSS/Initialize-VSS.ps1) to work both locally and in VSS.
-* [Test-All.ps1](Pester/Test-All.ps1) runs all other module specific test files.
+Within [Pester](Pester) folder we have a script to test all modules.
+```powershell
+$modulesToTest=@(
+    "DemoPester"
+    "WithDependency"
+)
+```
+
+* [Test-All.ps1](Pester/Test-All.ps1) runs all module tests.
+
+For the `WithDependency` module to execute successfully the commands are added ad-hoc.
+
+- To import the DemoPester
+
+```powershell
+$ps1Path=Resolve-Path "$PSScriptRoot\..\Modules\DemoPester\Test-DemoPester.ps1"
+Write-Verbose "Importing $ps1Path"
+. $ps1Path
+```
+
+- If the `PSMarkdown` module is not available, then only download the [ConvertTo-Markdown.ps1](https://raw.githubusercontent.com/ishu3101/PSMarkdown/master/ConvertTo-Markdown.ps1) that is necessary. Then import the file into the powershell session.
+
+```powershell
+if(-not (Get-Command ConvertTo-Markdown -ErrorAction SilentlyContinue)) {
+    Write-Warning "ConvertTo-Markdown commandlet not found"
+
+    $wc = New-Object System.Net.WebClient
+
+    $url='https://raw.githubusercontent.com/ishu3101/PSMarkdown/master/ConvertTo-Markdown.ps1'
+    $ps1Path = Join-Path $env:TEMP "ConvertTo-Markdown.ps1"
+    Write-Verbose "Downloading $url to $ps1Path"
+    $wc.DownloadFile($url, $ps1Path)
+
+    Write-Verbose "Importing $ps1Path"
+    . $ps1Path
+    Get-Command ConvertTo-Markdown
+}
+```
 
 ## The Scripts directory
 Within `Scripts` folder we have a collection for scripts. The [Test-Showcase.ps1](Scripts/Test-Showcase.ps1) shows how to use the [Reset-Module.ps1](ISEScripts/Reset-Module.ps1).
