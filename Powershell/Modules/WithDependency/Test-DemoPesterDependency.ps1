@@ -4,7 +4,7 @@
 
     Process {
         $command=Get-Command Test-DemoPester -ErrorAction SilentlyContinue
-        $command -ne $true
+        $command -ne $null
     }
 
     End {
