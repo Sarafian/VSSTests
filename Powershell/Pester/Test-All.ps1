@@ -27,7 +27,9 @@ $modulesToTest | ForEach-Object {
     $testPath=Resolve-Path "$PSScriptRoot\..\Modules\$_"
 
     $VerbosePreference="Continue"
-    Get-Command -Module PSMarkdown
+    $env:PSModulePath -split ';'
+    Get-Command -Module PSMarkdown -Verbose
+    Import-Module PSMarkdown -Verbose
     $VerbosePreference="SilentlyContinue"
 
     if($OutputFormat) {
