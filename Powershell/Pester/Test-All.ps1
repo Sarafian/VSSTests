@@ -24,13 +24,11 @@ $modulesToTest | ForEach-Object {
         & "$PSScriptRoot\Initialize-PSMarkdownDependency.ps1" 
     }
     
+    $testPath=Resolve-Path "$PSScriptRoot\..\Modules\$_"
+
     $VerbosePreference="Continue"
-    Write-Verbose "In Test-All"
-    ($env:PSModulePath -split ';')|ForEach-Object { Write-Verbose $_}
-    (Get-Module PSMarkdown).Path
     Get-Command -Module PSMarkdown
     $VerbosePreference="SilentlyContinue"
-    $testPath=Resolve-Path "$PSScriptRoot\..\Modules\$_"
 
     if($OutputFormat) {
         $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path).Replace(".Tests.", ".").Replace(".ps1", "")
