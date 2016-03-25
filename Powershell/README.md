@@ -34,12 +34,41 @@ Within [VSS](VSS) there is the original source code of Pester. The reason is tha
 Within [Pester](Pester) folder we have a script to test all modules.
 ```powershell
 $modulesToTest=@(
-    "Basic"
     "DemoPester"
+    "WithDependency"
 )
 ```
 
 * [Test-All.ps1](Pester/Test-All.ps1) runs all module tests.
+
+For the `WithDependency` module to execute successfully the commands are added ad-hoc.
+
+- To import the DemoPester
+
+```powershell
+$ps1Path=Resolve-Path "$PSScriptRoot\..\Modules\DemoPester\Test-DemoPester.ps1"
+Write-Verbose "Importing $ps1Path"
+. $ps1Path
+```
+
+- If the `PSMarkdown` module is not available, then only download the [ConvertTo-Markdown.ps1](https://raw.githubusercontent.com/ishu3101/PSMarkdown/master/ConvertTo-Markdown.ps1) that is necessary. Then import the file into the powershell session.
+
+```powershell
+if(-not (Get-Command ConvertTo-Markdown -ErrorAction SilentlyContinue)) {
+    Write-Warning "ConvertTo-Markdown commandlet not found"
+
+    $wc = New-Object System.Net.WebClient
+
+    $url='https://raw.githubusercontent.com/ishu3101/PSMarkdown/master/ConvertTo-Markdown.ps1'
+    $ps1Path = Join-Path $env:TEMP "ConvertTo-Markdown.ps1"
+    Write-Verbose "Downloading $url to $ps1Path"
+    $wc.DownloadFile($url, $ps1Path)
+
+    Write-Verbose "Importing $ps1Path"
+    . $ps1Path
+    Get-Command ConvertTo-Markdown
+}
+```
 
 ## The Scripts directory
 Within `Scripts` folder we have a collection for scripts. The [Test-Showcase.ps1](Scripts/Test-Showcase.ps1) shows how to use the [Reset-Module.ps1](ISEScripts/Reset-Module.ps1).
