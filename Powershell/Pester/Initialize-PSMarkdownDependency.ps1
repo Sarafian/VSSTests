@@ -46,10 +46,13 @@ if(-not (Get-Command ConvertTo-Markdown -ErrorAction SilentlyContinue)) {
     Write-Verbose "Writing $psm1Path"
     '. $PSScriptRoot\ConvertTo-Markdown.ps1' | Out-File $psm1Path
 
-    $items=Get-ChildItem $modulePath -Recurse
+    $items=Get-ChildItem $modulePath -Recurse -File
     Write-Verbose "Content in $modulePath"
-    $items
-    $items |ForEach-Object { Get-Content $_}
+    $items |ForEach-Object { 
+        Write-Verbose $_.FullName
+        $content=Get-Content $_.FullName
+        Write-Verbose $content
+    }
     
     $env:PSModulePath+=';'+$modulePath
     Write-Verbose "PSModulePath is"
