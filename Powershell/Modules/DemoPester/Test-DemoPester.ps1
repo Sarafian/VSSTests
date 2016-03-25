@@ -1,4 +1,4 @@
-﻿function Test-DemoPester {
+﻿Function Test-DemoPester {
     Param (
         [Parameter(
             Mandatory = $false
