@@ -12,7 +12,12 @@ This section is about figuring out
 ## The Modules directory
 
 Create all modules withing the `Modules` directory as powershell pipeline expects them. You don't have to worry about the `.psm1` location. Every module must have a matching Pester test script.
-* DemoPester is a simple module to demonstrate Pester error checking.
+
+* `DemoPester` is a simple module to demonstrate Pester error checking.
+* `WithDependency` is a simple module to demonstrate dependencies to other modules that are not available when executing from Pester.
+ * `Test-DemoPesterDependency` depends on the DemoPester module.
+ * `Test-PSMarkdownDependency` depends on the [PSMarkdown](https://www.powershellgallery.com/packages/PSMarkdown) module.
+
 
 ## The ISEScripts directory
 Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
@@ -26,9 +31,15 @@ Within [VSS](VSS) there is the original source code of Pester. The reason is tha
 * [QueryEnvironment.ps1](VSS/QueryEnvironment.ps1) output some information in the console to help out with understanding what is going on
 
 ## The Pester directory
-Within [Pester](Pester) folder we have a script per module. 
-* [Test-Basic.ps1](Pester/Test-Basic.ps1) tests the Basic module. The script utilizes the functionality provided in [Initialize-VSS.ps1](VSS/Initialize-VSS.ps1) to work both locally and in VSS.
-* [Test-All.ps1](Pester/Test-All.ps1) runs all other module specific test files.
+Within [Pester](Pester) folder we have a script to test all modules.
+```powershell
+$modulesToTest=@(
+    "Basic"
+    "DemoPester"
+)
+```
+
+* [Test-All.ps1](Pester/Test-All.ps1) runs all module tests.
 
 ## The Scripts directory
 Within `Scripts` folder we have a collection for scripts. The [Test-Showcase.ps1](Scripts/Test-Showcase.ps1) shows how to use the [Reset-Module.ps1](ISEScripts/Reset-Module.ps1).
