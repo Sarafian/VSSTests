@@ -19,7 +19,11 @@ $modulesToTest=@(
 
 $failedCount=0
 $modulesToTest | ForEach-Object {
-    
+    if($_ -eq "WithDependency")
+    {
+        & "$PSScriptRoot\Initialize-PSMarkdownDependency.ps1"
+    }
+
     $testPath=Resolve-Path "$PSScriptRoot\..\Modules\$_"
 
     if($OutputFormat) {
