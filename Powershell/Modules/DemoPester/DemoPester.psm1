@@ -1,0 +1,1 @@
+. $PSScriptRoot\Test-DemoPester.ps1

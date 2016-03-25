@@ -12,7 +12,7 @@ This section is about figuring out
 ## The Modules directory
 
 Create all modules withing the `Modules` directory as powershell pipeline expects them. You don't have to worry about the `.psm1` location. Every module must have a matching Pester test script.
-* Basic is a simple module with one commandlet `Get-String`. [Get-String.Tests.ps1](Modules/Basic/Get-String.Tests.ps1) is intenioally failing on one test.
+* DemoPester is a simple module to demonstrate Pester error checking.
 
 ## The ISEScripts directory
 Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
@@ -23,7 +23,6 @@ Create all scripts for `PowerShellISE` in [ISEScripts](ISEScripts)
 
 ## The VSS directory
 Within [VSS](VSS) there is the original source code of Pester. The reason is that at this point VSS uses powershell version 5 and Pester is not included.
-* [Initialize-VSS.ps1](VSS/Initialize-VSS.ps1) provides some basic functionality to detect if a script is executing at VSS
 * [QueryEnvironment.ps1](VSS/QueryEnvironment.ps1) output some information in the console to help out with understanding what is going on
 
 ## The Pester directory

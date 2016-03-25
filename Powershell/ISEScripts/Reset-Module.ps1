@@ -8,6 +8,6 @@
 }
 else
 {
-    Add-PSModulePath -Automation
+    & "$PSScriptRoot\Add-ModuleToPSModulePath.ps1"
 }
 
