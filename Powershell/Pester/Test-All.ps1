@@ -14,6 +14,7 @@ Param (
 
 $modulesToTest=@(
     "DemoPester"
+    "WithDependency"
 )
 
 $failedCount=0
