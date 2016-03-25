@@ -13,7 +13,6 @@ Param (
 & "$PSScriptRoot\Initialize-Pester.ps1"
 
 $modulesToTest=@(
-    "Basic"
     "DemoPester"
 )
 
