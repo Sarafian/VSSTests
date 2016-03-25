@@ -51,8 +51,8 @@ if(-not (Get-Command ConvertTo-Markdown -ErrorAction SilentlyContinue)) {
     Write-Verbose "Content in $modulesPath"
     $items |ForEach-Object { 
         Write-Verbose $_.FullName
-        $content=Get-Content $_.FullName
-        Write-Verbose $content
+        #$content=Get-Content $_.FullName
+        #Write-Verbose $content
     }
     
     $env:PSModulePath+=';'+$modulesPath

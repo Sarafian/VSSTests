@@ -21,8 +21,13 @@ $failedCount=0
 $modulesToTest | ForEach-Object {
     if($_ -eq "WithDependency")
     {
-        & "$PSScriptRoot\Initialize-PSMarkdownDependency.ps1"
+        & "$PSScriptRoot\Initialize-PSMarkdownDependency.ps1" 
     }
+    
+    Write-Verbose "In Test-All"
+    ($env:PSModulePath -split ';')|ForEach-Object { Write-Verbose $_}
+    (Get-Module PSMarkdown).Path
+    Get-Command -Module PSMarkdown
 
     $testPath=Resolve-Path "$PSScriptRoot\..\Modules\$_"
 
