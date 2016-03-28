@@ -16,5 +16,6 @@ Write-Verbose "$($os.Name) ($($os.OSArchitecture))"
 #Show a variable
 Write-Verbose "Env:system_debug=$($Env:system_debug)"
 
-Get-help New-ModuleManifest
+$supportsReleaseNotes=(Get-Command New-ModuleManifest).Parameters.ContainsKey("ReleaseNotes")
 
+$supportsReleaseNotes
