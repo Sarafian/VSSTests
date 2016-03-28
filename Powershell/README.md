@@ -17,6 +17,7 @@ Create all modules withing the `Modules` directory as powershell pipeline expect
 * `WithDependency` is a simple module to demonstrate dependencies to other modules that are not available when executing from Pester.
  * `Test-DemoPesterDependency` depends on the DemoPester module.
  * `Test-PSMarkdownDependency` depends on the [PSMarkdown](https://www.powershellgallery.com/packages/PSMarkdown) module.
+ * `Get-PSMarkdownMock` shows how to mock the `ConvertTo-Markdown` dependency.
 
 
 ## The ISEScripts directory
